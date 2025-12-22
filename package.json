@@ -39,6 +39,7 @@
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
+    "lint:check": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

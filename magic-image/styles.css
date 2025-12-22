@@ -1,0 +1,664 @@
+/**
+ * @with-logic/magic-image styles
+ *
+ * Override CSS variables to customize the appearance.
+ */
+
+/* === CSS Variables === */
+:root {
+  --magic-primary: 26 26 46;
+  --magic-primary-foreground: 255 255 255;
+  --magic-secondary: 99 102 241;
+  --magic-secondary-foreground: 255 255 255;
+  --magic-success: 34 197 94;
+  --magic-success-foreground: 255 255 255;
+  --magic-error: 239 68 68;
+  --magic-error-foreground: 255 255 255;
+  --magic-background: 255 255 255;
+  --magic-foreground: 26 26 46;
+  --magic-overlay: 0 0 0;
+  --magic-border: 229 231 235;
+  --magic-radius: 0.375rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --magic-background: 26 26 46;
+    --magic-foreground: 255 255 255;
+    --magic-border: 75 85 99;
+  }
+}
+
+/* === Button === */
+.magic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    opacity 0.15s,
+    border-color 0.15s;
+  border-radius: var(--magic-radius);
+  height: 2.25rem;
+  padding: 0.375rem 0.75rem;
+}
+
+.magic-btn:focus-visible {
+  outline: 2px solid rgb(var(--magic-secondary));
+  outline-offset: 2px;
+}
+
+.magic-btn:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.magic-btn svg {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+/* Button variants */
+.magic-btn--default {
+  background-color: rgb(var(--magic-primary));
+  color: rgb(var(--magic-primary-foreground));
+}
+
+.magic-btn--default:hover {
+  background-color: rgb(var(--magic-primary) / 0.9);
+}
+
+.magic-btn--secondary {
+  background-color: rgb(var(--magic-secondary));
+  color: rgb(var(--magic-secondary-foreground));
+}
+
+.magic-btn--secondary:hover {
+  background-color: rgb(var(--magic-secondary) / 0.8);
+}
+
+.magic-btn--ghost {
+  background-color: rgb(var(--magic-background) / 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgb(var(--magic-foreground));
+}
+
+.magic-btn--ghost:hover {
+  background-color: rgb(var(--magic-background) / 0.85);
+}
+
+.magic-btn--outline {
+  background-color: transparent;
+  border: 1px solid rgb(var(--magic-secondary));
+  color: rgb(var(--magic-secondary));
+}
+
+.magic-btn--outline:hover {
+  background-color: rgb(var(--magic-secondary) / 0.1);
+}
+
+/* Button sizes */
+.magic-btn--sm {
+  height: 2rem;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.875rem;
+}
+
+.magic-btn--xs {
+  height: 1.75rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.magic-btn--icon {
+  height: 2rem;
+  width: 2rem;
+  padding: 0;
+}
+
+.magic-btn--rounded {
+  border-radius: 9999px;
+}
+
+.magic-btn__icon {
+  display: inline-flex;
+}
+
+/* === Number Stepper === */
+.magic-stepper {
+  display: flex;
+  align-items: center;
+  background-color: rgb(var(--magic-background) / 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--magic-radius);
+}
+
+.magic-stepper__btn {
+  padding: 0.625rem;
+  background: transparent;
+  border: none;
+  color: rgb(var(--magic-foreground));
+  cursor: pointer;
+  transition: background-color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.magic-stepper__btn:hover {
+  background-color: rgb(var(--magic-foreground) / 0.1);
+}
+
+.magic-stepper__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.magic-stepper__btn svg {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.magic-stepper__value {
+  padding: 0 0.5rem;
+  color: rgb(var(--magic-foreground));
+  font-size: 0.875rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  min-width: 1.5rem;
+}
+
+/* === MagicImage Wrapper === */
+.magic-wrapper {
+  position: relative;
+}
+
+.magic-wrapper--generating .magic-wrapper__image {
+  opacity: 0.5;
+}
+
+/* === Controls (bottom toolbar) === */
+.magic-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.magic-wrapper:hover .magic-controls {
+  opacity: 1;
+}
+
+.magic-controls--right {
+  left: auto;
+  right: 0.5rem;
+}
+
+.magic-controls__group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.magic-controls__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.magic-controls__row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.magic-controls__row--primary {
+  justify-content: flex-start;
+}
+
+.magic-controls__row--secondary {
+  justify-content: flex-start;
+}
+
+.magic-controls__row--spread {
+  justify-content: space-between;
+}
+
+/* === Loading State === */
+.magic-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.magic-loading__content {
+  background-color: rgb(var(--magic-overlay) / 0.7);
+  color: rgb(var(--magic-primary-foreground));
+  padding: 0.5rem 1rem;
+  border-radius: var(--magic-radius);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.magic-loading__spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  animation: magic-spin 1s linear infinite;
+}
+
+.magic-loading__spinner-track {
+  opacity: 0.25;
+}
+
+.magic-loading__spinner-head {
+  opacity: 0.75;
+}
+
+@keyframes magic-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* === Error State === */
+.magic-error {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  background-color: rgb(var(--magic-error));
+  color: rgb(var(--magic-error-foreground));
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--magic-radius);
+  font-size: 0.875rem;
+}
+
+/* === Badges === */
+.magic-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--magic-radius);
+  font-size: 0.75rem;
+}
+
+.magic-badge--success {
+  background-color: rgb(var(--magic-success));
+  color: rgb(var(--magic-success-foreground));
+}
+
+.magic-badge--selected {
+  background-color: rgb(var(--magic-secondary));
+  color: rgb(var(--magic-secondary-foreground));
+}
+
+.magic-badge__icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* === Carousel Navigation === */
+.magic-carousel {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+.magic-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgb(var(--magic-overlay) / 0.7);
+  color: rgb(var(--magic-primary-foreground));
+  opacity: 0;
+  transition:
+    opacity 0.15s,
+    background-color 0.15s;
+}
+
+.magic-carousel-btn:hover {
+  background-color: rgb(var(--magic-overlay) / 0.9);
+}
+
+.magic-wrapper:hover .magic-carousel-btn {
+  opacity: 1;
+}
+
+.magic-carousel-btn--prev {
+  left: 0.5rem;
+}
+
+.magic-carousel-btn--next {
+  right: 0.5rem;
+}
+
+.magic-carousel-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.magic-grid-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.magic-wrapper:hover .magic-grid-btn {
+  opacity: 1;
+}
+
+.magic-save-btn {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 100;
+}
+
+.magic-wrapper:hover .magic-save-btn {
+  opacity: 1;
+}
+
+/* === Selection Button (top-left) === */
+.magic-select-btn {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.magic-wrapper:hover .magic-select-btn {
+  opacity: 1;
+}
+
+.magic-saved-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+/* === Modal Overlay === */
+.magic-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgb(var(--magic-overlay) / 0.8);
+  z-index: 50;
+}
+
+/* === Dialog === */
+.magic-dialog-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.magic-dialog {
+  background-color: rgb(var(--magic-background));
+  border-radius: var(--magic-radius);
+  width: 100%;
+  pointer-events: auto;
+  box-shadow:
+    0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.magic-dialog--grid {
+  max-width: 56rem;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.magic-dialog--prompt {
+  max-width: 32rem;
+}
+
+.magic-dialog__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid rgb(var(--magic-border));
+  flex-shrink: 0;
+}
+
+.magic-dialog__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgb(var(--magic-foreground));
+  margin: 0;
+}
+
+.magic-dialog__body {
+  padding: 1rem;
+}
+
+.magic-dialog__body--scroll {
+  flex: 1;
+  overflow: auto;
+}
+
+.magic-dialog__body--spaced > * + * {
+  margin-top: 1rem;
+}
+
+.magic-dialog__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-top: 1px solid rgb(var(--magic-border));
+  flex-shrink: 0;
+}
+
+/* === Image Grid === */
+.magic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.magic-grid__item {
+  position: relative;
+  cursor: pointer;
+  border-radius: var(--magic-radius);
+  overflow: hidden;
+  border: 4px solid transparent;
+  transition: border-color 0.15s;
+  background: none;
+  padding: 0;
+}
+
+.magic-grid__item:hover {
+  border-color: rgb(var(--magic-border));
+}
+
+.magic-grid__item--selected {
+  border-color: rgb(var(--magic-secondary));
+}
+
+.magic-grid__item--saved {
+  border-color: rgb(var(--magic-success));
+  cursor: default;
+}
+
+.magic-grid__item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.magic-grid__badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.magic-grid__check {
+  background-color: rgb(var(--magic-secondary));
+  color: rgb(var(--magic-secondary-foreground));
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.magic-grid__check svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.magic-grid__number {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  background-color: rgb(var(--magic-overlay) / 0.7);
+  color: rgb(var(--magic-primary-foreground));
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--magic-radius);
+  font-size: 0.75rem;
+}
+
+/* === Form Elements === */
+.magic-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(var(--magic-foreground));
+  margin-bottom: 0.5rem;
+}
+
+.magic-textarea {
+  width: 100%;
+  height: 8rem;
+  border: 1px solid rgb(var(--magic-border));
+  border-radius: var(--magic-radius);
+  resize: none;
+  color: rgb(var(--magic-foreground));
+  background-color: rgb(var(--magic-background));
+  font-family: inherit;
+  font-size: 0.875rem;
+}
+
+.magic-textarea:focus {
+  outline: none;
+  border-color: rgb(var(--magic-secondary));
+  box-shadow: 0 0 0 2px rgb(var(--magic-secondary) / 0.2);
+}
+
+.magic-textarea::placeholder {
+  color: rgb(var(--magic-foreground) / 0.5);
+}
+
+/* === Upload Area === */
+.magic-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 6rem;
+  border: 2px dashed rgb(var(--magic-border));
+  border-radius: var(--magic-radius);
+  cursor: pointer;
+  transition: border-color 0.15s;
+  gap: 0.25rem;
+  color: rgb(var(--magic-foreground) / 0.6);
+}
+
+.magic-upload:hover {
+  border-color: rgb(var(--magic-secondary));
+}
+
+.magic-upload svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.magic-upload span {
+  font-size: 0.875rem;
+}
+
+.magic-upload__input {
+  display: none;
+}
+
+/* === Reference Image Preview === */
+.magic-ref-preview {
+  position: relative;
+  display: inline-block;
+}
+
+.magic-ref-preview img {
+  max-height: 8rem;
+  border-radius: var(--magic-radius);
+  border: 1px solid rgb(var(--magic-border));
+}
+
+.magic-ref-preview__remove {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background-color: rgb(var(--magic-background));
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+}
+
+/* === Utility === */
+.magic-hidden {
+  display: none;
+}
+
+.magic-icon--sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+.magic-icon--md {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.magic-icon--lg {
+  width: 1.5rem;
+  height: 1.5rem;
+}

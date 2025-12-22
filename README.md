@@ -223,9 +223,9 @@ import type {
 
 ## Integration Guides
 
-- [Plain React / Vite](docs/integration-plain-react.md)
-- [React Router](docs/integration-react-router.md)
-- [Next.js](docs/integration-nextjs.md)
+- [Plain React / Vite](integration-docs/integration-plain-react.md)
+- [React Router](integration-docs/integration-react-router.md)
+- [Next.js](integration-docs/integration-nextjs.md)
 
 ## License
 

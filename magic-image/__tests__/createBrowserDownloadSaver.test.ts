@@ -70,10 +70,10 @@ describe("createBrowserDownloadSaver", () => {
     });
     vi.stubGlobal("Image", MockImage);
 
-    global.fetch = vi.fn().mockResolvedValue({
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: true,
       blob: () => Promise.resolve(new Blob(["test"], { type: "image/png" })),
-    });
+    } as Response);
   });
 
   afterEach(() => {
@@ -117,9 +117,7 @@ describe("createBrowserDownloadSaver", () => {
       targetPath: "/test.png",
     });
 
-    expect(global.fetch).toHaveBeenCalledWith(
-      "data:image/png;base64,iVBORw0KGgo=",
-    );
+    expect(fetch).toHaveBeenCalledWith("data:image/png;base64,iVBORw0KGgo=");
     expect(mockCreateObjectURL).toHaveBeenCalled();
   });
 
@@ -131,7 +129,7 @@ describe("createBrowserDownloadSaver", () => {
       targetPath: "/test.png",
     });
 
-    expect(global.fetch).toHaveBeenCalledWith("https://example.com/image.png");
+    expect(fetch).toHaveBeenCalledWith("https://example.com/image.png");
     expect(mockCreateObjectURL).toHaveBeenCalled();
   });
 
@@ -147,10 +145,10 @@ describe("createBrowserDownloadSaver", () => {
   });
 
   it("returns failure on fetch error", async () => {
-    global.fetch = vi.fn().mockResolvedValue({
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: false,
       statusText: "Not Found",
-    });
+    } as Response);
 
     const saveImage = createBrowserDownloadSaver();
 

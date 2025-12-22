@@ -1,7 +1,8 @@
+import React from "react";
+import type { ReactNode } from "react";
 import { describe, it, expect, vi } from "vitest";
 import { renderHook } from "@testing-library/react";
 import { MagicImageProvider, useMagicImage, useMagicImageConfig } from "../";
-import type { ReactNode } from "react";
 
 const mockGenerateImage = vi.fn();
 const mockSaveImage = vi.fn();

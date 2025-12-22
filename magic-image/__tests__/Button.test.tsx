@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Button } from "../components/Button";
+import React from "react";
 
 describe("Button", () => {
   it("renders with different variants", () => {
@@ -16,7 +17,7 @@ describe("Button", () => {
     rerender(<Button variant="ghost">Ghost</Button>);
     expect(screen.getByRole("button", { name: "Ghost" })).toBeInTheDocument();
 
-    rerender(<Button variant="outline">Outline</Button>);
+    rerender(<Button variant="outlineSecondary">Outline</Button>);
     expect(screen.getByRole("button", { name: "Outline" })).toBeInTheDocument();
   });
 

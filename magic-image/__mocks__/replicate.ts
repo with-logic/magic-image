@@ -1,11 +1,13 @@
 import { vi } from "vitest";
 
-export const mockRun = vi
+export const mockRun: ReturnType<typeof vi.fn> = vi
   .fn()
   .mockResolvedValue(["https://example.com/generated.jpg"]);
 
-const Replicate = vi.fn().mockImplementation(() => ({
-  run: mockRun,
-}));
+const Replicate: ReturnType<typeof vi.fn> = vi
+  .fn()
+  .mockImplementation(function () {
+    return { run: mockRun };
+  });
 
 export default Replicate;

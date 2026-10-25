@@ -54,7 +54,7 @@ describe("createBrowserDownloadSaver", () => {
     });
 
     // Mock Image class for conversion
-    const MockImage = vi.fn().mockImplementation(() => {
+    const MockImage = vi.fn().mockImplementation(function () {
       const img = {
         src: "",
         naturalWidth: 800,

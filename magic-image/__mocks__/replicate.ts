@@ -1,11 +1,14 @@
-import { vi } from "vitest";
+import type ReplicateClient from "replicate";
+import { type Mock, vi } from "vitest";
 
-export const mockRun = vi
-  .fn()
+export const mockRun: Mock<ReplicateClient["run"]> = vi
+  .fn<ReplicateClient["run"]>()
   .mockResolvedValue(["https://example.com/generated.jpg"]);
 
-const Replicate = vi.fn().mockImplementation(() => ({
-  run: mockRun,
-}));
+const Replicate: Mock<typeof ReplicateClient> = vi
+  .fn<typeof ReplicateClient>()
+  .mockImplementation(function () {
+    return { run: mockRun };
+  });
 
 export default Replicate;

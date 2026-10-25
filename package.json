@@ -61,13 +61,13 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
-    "@storybook/addon-essentials": "^8.4.7",
-    "@storybook/addon-interactions": "^8.4.7",
-    "@storybook/addon-links": "^8.4.7",
-    "@storybook/blocks": "^8.4.7",
-    "@storybook/react": "^8.4.7",
-    "@storybook/react-vite": "^8.4.7",
-    "@storybook/test": "^8.4.7",
+    "@storybook/addon-essentials": "8.6.19",
+    "@storybook/addon-interactions": "8.6.19",
+    "@storybook/addon-links": "8.6.19",
+    "@storybook/blocks": "8.6.19",
+    "@storybook/react": "8.6.19",
+    "@storybook/react-vite": "8.6.19",
+    "@storybook/test": "8.6.19",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
@@ -82,11 +82,11 @@
     "prettier": "^3.4.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "storybook": "^8.4.7",
+    "storybook": "8.6.19",
     "tsup": "^8.3.5",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.6",
+    "vite": "6.4.4",
     "vitest": "4.1.12"
   },
   "keywords": [
@@ -106,5 +106,10 @@
   "bugs": {
     "url": "https://github.com/with-logic/magic-image/issues"
   },
-  "homepage": "https://github.com/with-logic/magic-image#readme"
+  "homepage": "https://github.com/with-logic/magic-image#readme",
+  "overrides": {
+    "@storybook/addon-actions": {
+      "uuid": "11.1.1"
+    }
+  }
 }

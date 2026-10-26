@@ -10,8 +10,7 @@
 
 ```typescript
 type Result<T> =
-  | { type: "success"; data: T }
-  | { type: "error"; error: string };
+  { type: "success"; data: T } | { type: "error"; error: string };
 
 function handle<T>(result: Result<T>) {
   if (result.type === "success") {

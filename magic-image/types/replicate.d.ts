@@ -8,10 +8,7 @@ declare module "replicate" {
   }
 
   type ModelOutput =
-    | string
-    | string[]
-    | { url: string }
-    | Record<string, unknown>;
+    string | string[] | { url: string } | Record<string, unknown>;
 
   class Replicate {
     constructor(options: ReplicateOptions);

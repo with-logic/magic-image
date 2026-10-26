@@ -40,6 +40,9 @@ jobs:
       - name: Run all tests with coverage
         run: npm test
 
+      - name: Verify Storybook action events
+        run: npm run test:storybook-actions
+
       - name: Build library
         run: npm run build
 

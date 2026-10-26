@@ -45,6 +45,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:storybook-actions": "node --test scripts/storybook-actions.test.mjs",
     "test:coverage": "vitest run --coverage",
     "pre-commit": "npm run format && npm run lint:fix && npm run typecheck",
     "storybook": "storybook dev -p 6006",

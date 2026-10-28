@@ -10,7 +10,8 @@ PRs scan base-to-head history, so adding a credential and deleting it in a later
 commit still fails. Pushes scan the pushed range when the previous commit is
 available; new refs and manual runs scan history reachable from the selected head.
 Ignored and untracked local files such as `.env` are outside the scan. A
-force-added or previously tracked `.env` is Git content and is checked.
+force-added or previously tracked `.env` is checked by CI only after commit and
+within the selected event range; the local `--staged` command checks the index.
 
 Image preparation and checkout happen before scanning. The scan runs with
 networking disabled, a read-only source mount, and no service credentials. No
@@ -80,7 +81,7 @@ Install the native CLI once, then scan only the Git index:
 
 ```sh
 brew install gitleaks
-GIT_CONFIG_PARAMETERS="${GIT_CONFIG_PARAMETERS:+$GIT_CONFIG_PARAMETERS }'color.ui=false' 'color.diff=false'" \
+GIT_NO_LAZY_FETCH=1 GIT_CONFIG_PARAMETERS="${GIT_CONFIG_PARAMETERS:+$GIT_CONFIG_PARAMETERS }'color.ui=false' 'color.diff=false'" \
 gitleaks git --pre-commit --staged --redact=100
 ```
 
@@ -89,7 +90,7 @@ diff parser from silently missing staged content. Use 8.30.1 for matching CI rul
 To check committed branch history against a locally available base:
 
 ```sh
-GIT_CONFIG_PARAMETERS="${GIT_CONFIG_PARAMETERS:+$GIT_CONFIG_PARAMETERS }'color.ui=false' 'color.diff=false'" \
+GIT_NO_LAZY_FETCH=1 GIT_CONFIG_PARAMETERS="${GIT_CONFIG_PARAMETERS:+$GIT_CONFIG_PARAMETERS }'color.ui=false' 'color.diff=false'" \
 gitleaks git --redact=100 \
   --log-opts="origin/main..HEAD --full-history --diff-merges=remerge --text --no-ext-diff --no-textconv"
 ```

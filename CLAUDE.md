@@ -52,11 +52,9 @@ treat missing Crew as a failed review. Run the local review before you open a
 pull request. It does not replace the hosted review, which stays the merge
 requirement.
 
-Prepare each required local review in the existing coding-agent session. From this
-repository root, run `crew version` and `crew install --latest --json` with a
-command timeout. Require the published Crew release that
-[Shared local review](#shared-local-review) names. Then read the updated project
-`review/SKILL.md`: `.agents/skills/review/SKILL.md` for Codex or
+Prepare each required local review in the existing coding-agent session with the
+commands in [Shared local review](#shared-local-review). Then read the updated
+project `review/SKILL.md`: `.agents/skills/review/SKILL.md` for Codex or
 `.claude/skills/review/SKILL.md` for Claude Code. Follow its shared preparation
 procedure to verify this agent's full roster, helper and source records, then
 continue `/review` in this session. Refresh once per `/review` run.
@@ -84,9 +82,10 @@ Shared review skills and the PR-description helper come from `.crewrc` through
 Crew. `npm install` does not run Crew.
 
 Use a published [Crew release](https://crew.logic.inc/) with project manifests
-(0.13+; 0.14.0 verified). Check `crew version` and Git read access to
+(0.13+; 0.14.0 verified). Run `crew version` and check Git read access to
 `with-logic/skills`. Enable the agent if needed with `crew agents enable codex`
-or `crew agents enable claude-code`, then run this from the repository root:
+or `crew agents enable claude-code`, then run this from the repository root with
+a command timeout:
 
 ```sh
 crew install --latest --json

@@ -140,3 +140,9 @@ vite.config.ts.timestamp-*
 
 # macOS files
 **/.DS_Store
+
+# Crew-managed project copies. The agent skill directories are ignored as a whole
+# so that no shared skill can be committed here. A skill that this repository
+# tracks there needs a negation rule.
+/.agents/skills/*
+/.claude/skills/*

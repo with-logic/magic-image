@@ -67,9 +67,9 @@ continue `/review` in this session. Refresh once per `/review` run.
 
 Failed preparation stops required review. A timeout is a failed preparation. If
 you cannot recover the preparation for any other reason, report the local review
-as not run and ask the user before you open the pull request. A successful `npm install`, a
-`no_agents` result, or another agent's install does not prove readiness. Do not
-use stale or personal skills as a fallback. See
+as not run and ask the user before you open the pull request. A successful
+`npm install`, a `no_agents` result, or another agent's install does not prove
+readiness. Do not use stale or personal skills as a fallback. See
 [Shared local review](#shared-local-review) for setup and recovery.
 
 The shared procedure includes proposed PR title and body text from the separately

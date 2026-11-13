@@ -59,7 +59,7 @@ command timeout. Require the published Crew release that
 `review/SKILL.md`: `.agents/skills/review/SKILL.md` for Codex or
 `.claude/skills/review/SKILL.md` for Claude Code. Follow its shared preparation
 procedure to verify this agent's full roster, helper and source records, then
-continue `/review` in this session. Refresh once per invocation.
+continue `/review` in this session. Refresh once per `/review` run.
 
 Failed preparation stops required review. A timeout is a failed preparation. If
 you cannot recover the preparation, report the local review as not run and ask the
@@ -73,8 +73,9 @@ installed pull-request-description helper. This local step does not edit the PR
 or change the code-review verdict. Keep `.crewrc` and its generated lock tracked
 and downloaded copies ignored. Do not commit files under `.agents/skills/` or
 `.claude/skills/` that Crew installed. As the agent, do not discard a
-`.crewrc.lock` change. The author commits it in the pull request under review or
-discards it after the review. Do not refresh while reviewers run. Do not add a
+`.crewrc.lock` change. The pull request author commits it in the pull request
+under review, or discards it after the review with `git restore .crewrc.lock`.
+Do not refresh while reviewers run. Do not add a
 script or workflow to this repository that downloads or selects review skills.
 
 ## Shared local review
@@ -99,10 +100,9 @@ it.
 Commit `.crewrc` and its Crew-generated `.crewrc.lock`. Plain `crew install`
 retains the locked revision; `--latest` can advance it. Each refresh installs the
 current `main` of `with-logic/skills` before this repository reviews the lock
-change; the lock then names the revision that ran. The agent does not discard a
-lock advance. The author commits it in the pull request under review, so that
-reviewers see it, or discards it after the review with `git restore .crewrc.lock`.
-After a discard, the installed copies are newer than the lock until the next
-`crew install`. If `.crewrc.lock` conflicts with the base branch, keep the base
-branch's lock; the next refresh can advance it again. Downloaded project skills
+change; the lock then names the revision that ran. Commit a lock advance in the
+pull request under review, so that reviewers see it. After a discard, the
+installed copies are newer than the lock until the next `crew install`. If
+`.crewrc.lock` conflicts with the base branch, keep the base branch's lock; the
+next refresh can advance it again. Downloaded project skills
 stay ignored; authored and personal skills remain owned by their authors.

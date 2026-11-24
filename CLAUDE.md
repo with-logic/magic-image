@@ -81,10 +81,11 @@ and downloaded copies ignored. Do not commit files under `.agents/skills/` or
 under review, or discards it after the review with `git restore .crewrc.lock`.
 Do not refresh while reviewers run. Do not add a
 script or workflow to this repository that downloads or selects review skills.
-The hosted review workflow is the one exception to the rule against a script or
-workflow that downloads or selects review skills: its
-`skills-app-client-id` input (variable `PIPELINE_SOURCE_APP_CLIENT_ID`) and the secret `PIPELINE_SOURCE_APP_PRIVATE_KEY`,
-selects the Skills source for hosted CI only.
+The hosted review workflow does not download or select review skills. It passes
+the source App credentials to Pipeline's shared review action: the
+`skills-app-client-id` input (variable `PIPELINE_SOURCE_APP_CLIENT_ID`) and the
+`skills-app-private-key` input (secret `PIPELINE_SOURCE_APP_PRIVATE_KEY`). That
+action always fetches the skills from `with-logic/skills`.
 
 ## Shared local review
 

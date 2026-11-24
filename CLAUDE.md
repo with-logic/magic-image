@@ -82,8 +82,8 @@ under review, or discards it after the review with `git restore .crewrc.lock`.
 Do not refresh while reviewers run. Do not add a
 script or workflow to this repository that downloads or selects review skills.
 The hosted review workflow is the one exception to the rule against a script or
-workflow that downloads or selects review skills: its `review-source` input, with the
-variable `PIPELINE_SOURCE_APP_CLIENT_ID` and the secret `PIPELINE_SOURCE_APP_PRIVATE_KEY`,
+workflow that downloads or selects review skills: its
+`skills-app-client-id` input (variable `PIPELINE_SOURCE_APP_CLIENT_ID`) and the secret `PIPELINE_SOURCE_APP_PRIVATE_KEY`,
 selects the Skills source for hosted CI only.
 
 ## Shared local review
